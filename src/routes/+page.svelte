@@ -1,2 +1,84 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { enhance } from '$app/forms';
+
+	export let data;
+	export let form;
+	let creating = false;
+	let deleting: string[] = [];
+</script>
+
+<header>
+	<h1>Hi {data.user}</h1>
+</header>
+<main>
+	<h2>Your Todos</h2>
+	{#if form?.error}
+		<p class="error">{form.error}</p>
+	{/if}
+
+	<form method="POST" action="?/create" use:enhance={() => {
+		creating = true
+		return async ({ update }) => {
+			await update()
+			creating = false
+		}
+	}}>
+		<label
+			>add a todo:
+			<input disabled={creating} id="text" name="text" type="text" required />
+		</label>
+	</form>
+
+	<ul>
+		{#each data.todos.filter(td => !deleting.includes(td.id)) as todo, index (todo.id)}
+			<li>
+				<form method="POST" action="?/delete" use:enhance={() => {
+					deleting = [...deleting, todo.id]
+					return async({ update }) => {
+						await update()
+						deleting = deleting.filter(id => id !== todo.id)
+					}
+				}}>
+					<input type="hidden" name="id" value={todo.id} />
+					<span>{index + 1}. {todo.text}</span>
+					<button style="background-color: #eeaaa0;" type="submit">X</button>
+				</form>
+			</li>
+		{/each}
+	</ul>
+</main>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		width: 30vw;
+		max-width: 20rem;
+		border: 2px solid black;
+	}
+
+	li {
+		list-style-type: none;
+		width: 100%;
+	}
+
+	li > form {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	li:nth-child(even) {
+		background-color: aliceblue;
+	}
+
+	.error {
+		font-size: 1rem;
+		color: red;
+	}
+</style>
