@@ -1,16 +1,16 @@
 import '$lib/dotenv-config'
-import { Pool, type PoolClient } from 'pg'
+import pg from 'pg'
 
 const connectionString = process.env.DATABASE_URL
 console.log(connectionString)
 
-const pool = new Pool({
+const pool = new pg.Pool({
     connectionString,
     max: 10,
 })
 
 // can throw error
-export async function useClient<T>(fn: (c:PoolClient) => Promise<T>): Promise<T> {
+export async function useClient<T>(fn: (c:pg.PoolClient) => Promise<T>): Promise<T> {
     const client = await pool.connect()
     const res = await fn(client)
     await client.release()
