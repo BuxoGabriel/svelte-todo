@@ -27,5 +27,5 @@
 </form>
 
 {#if form?.error}
-    <p class="error">{form.error}</p>
+    <p style="color: red; font-size: 1rem;">{form.error}</p>
 {/if}

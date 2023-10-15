@@ -58,8 +58,7 @@
 	ul {
 		display: flex;
 		flex-direction: column;
-		width: 30vw;
-		max-width: 20rem;
+		width: 30rem;
 		border: 2px solid black;
 	}
 

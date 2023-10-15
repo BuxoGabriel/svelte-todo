@@ -24,7 +24,7 @@ export const actions = {
         } catch (error) {
             return fail(422, {
                 username,
-                error: (error as Error).message
+                error: "Could not create user"
             })
         }
         // redirect to app

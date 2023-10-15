@@ -19,7 +19,7 @@ async function addTodo(user: number, todo: string): Promise<Todo> {
 
 async function deleteTodo(user: number, todoId: number): Promise<Todo> {
     return useClient(async (pc) => {
-        const res = await pc.query('DELETE FROM "Todo" WHERE id=$1 AND "userId"=$2', [user, todoId])
+        const res = await pc.query('DELETE FROM "Todo" WHERE id=$1 AND "userId"=$2', [todoId, user])
         const todoItem = res.rows[0]
         return todoItem as Todo
     })
@@ -27,7 +27,7 @@ async function deleteTodo(user: number, todoId: number): Promise<Todo> {
 
 async function getTodos(user: number): Promise<Todo[]> {
     return await useClient(async (pc) => {
-        const res = await pc.query('SELECT * FROM "Todo" WHERE "userId"=$1', [user])
+        const res = await pc.query('SELECT * FROM "Todo" WHERE "userId"=$1 ORDER BY date asc', [user])
         return res.rows
     })
 }
