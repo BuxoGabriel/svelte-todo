@@ -4,11 +4,11 @@
 	export let data;
 	export let form;
 	let creating = false;
-	let deleting: string[] = [];
+	let deleting: number[] = [];
 </script>
 
 <header>
-	<h1>Hi {data.user}</h1>
+	<h1>Hi {data.username}</h1>
 </header>
 <main>
 	<h2>Your Todos</h2>
@@ -28,9 +28,8 @@
 			<input disabled={creating} id="text" name="text" type="text" required />
 		</label>
 	</form>
-
 	<ul>
-		{#each data.todos.filter(td => !deleting.includes(td.id)) as todo, index (todo.id)}
+		{#each data.todoList.filter(td => !deleting.includes(td.id)) as todo, index (todo.id)}
 			<li>
 				<form method="POST" action="?/delete" use:enhance={() => {
 					deleting = [...deleting, todo.id]
@@ -39,6 +38,7 @@
 						deleting = deleting.filter(id => id !== todo.id)
 					}
 				}}>
+					<input type="checkbox" checked={todo.completed} name="completed" />
 					<input type="hidden" name="id" value={todo.id} />
 					<span>{index + 1}. {todo.text}</span>
 					<button style="background-color: #eeaaa0;" type="submit">X</button>

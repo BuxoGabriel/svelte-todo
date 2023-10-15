@@ -1,14 +1,18 @@
 import { decodeJwt } from '$lib/auth.js'
-import { addTodo, deleteTodo, getTodos } from '$lib/database/todos.js'
+import todos from '$lib/database/todos'
 import { error, fail, redirect } from '@sveltejs/kit'
 
 export async function load({ cookies }) {
+    // check user has token
     const token = cookies.get("userToken")
     if (!token) throw redirect(301, "/login")
-    const user = decodeJwt(token)
-    if (!user) throw redirect(301, "/login")
-    const todos = getTodos(user) ?? []
-    return { user, todos }
+    // check token is valid
+    const userInfo = decodeJwt(token)
+    if (!userInfo) throw redirect(301, "/login")
+    // send page relevent info
+    const { id, username } = userInfo
+    const todoList = await todos.getTodos(id) ?? []
+    return { username, todoList }
 }
 
 export const actions = {
@@ -26,7 +30,7 @@ export const actions = {
         const user = decodeJwt(userToken)
         if (!user) return redirect(303, '/login')
         try {
-            await addTodo(user, text)
+            await todos.addTodo(user.id, text)
         } catch (error) {
             return fail(400, {
                 text, error: (error as Error).message
@@ -42,8 +46,10 @@ export const actions = {
         if (!userToken || typeof userToken !== 'string') throw redirect(303, "/login")
         const user = decodeJwt(userToken)
         if (!user) throw redirect(303, "/login")
+        const todoId = parseInt(id)
+        if(isNaN(todoId)) throw error(400, "bad value of todo id")
         try {
-            await deleteTodo(user, id)
+            await todos.deleteTodo(user.id, todoId)
             return { success: true }
         } catch (error) {
             return fail(400, {

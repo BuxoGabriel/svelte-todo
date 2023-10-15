@@ -1,4 +1,5 @@
-import { createJwt, validateCredentials } from '$lib/auth.js'
+import users from '$lib/database/users'
+import { createJwt } from '$lib/auth.js'
 import { fail, redirect } from '@sveltejs/kit'
 
 export const actions = {
@@ -14,15 +15,17 @@ export const actions = {
             })
         }
         // check if user exists
-        if (!validateCredentials(username, password)) {
+        try {
+            const user = await users.authenticateUser(username, password)
+            // set cookie
+            const token = createJwt({id: user.id, username: user.username})
+            cookies.set('userToken', token)
+        } catch(error) {
             return fail(422, {
                 username,
-                error: 'username and or password is incorrect'
+                error: (error as Error).message
             })
         }
-        // set cookie
-        const token = createJwt(username)
-        cookies.set('userToken', token)
         // redirect to app
         throw redirect(303, "/")
     }

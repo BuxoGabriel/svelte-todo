@@ -1,36 +1,24 @@
+import './dotenv-config'
+import { randomBytes } from "crypto"
 import jwt from "jsonwebtoken"
-const secretKey = "SuperSecret"
+const secretKey = process.env.JWT_SECRET ?? randomBytes(32).toString("hex")
 
-export type User = {
-    username: string,
-    password: string
+export type UserToken = {
+    id: number,
+    username: string
 }
 
-const users: User[] = []
-
-export function createJwt(username: string): string {
-    const token = jwt.sign({username}, secretKey)
+export function createJwt(userInfo: UserToken): string {
+    const token = jwt.sign(userInfo, secretKey)
     return token
 }
 
-export function decodeJwt(token: string): string | null {
+export function decodeJwt(token: string): UserToken | null {
     try {
         const decodedUser = jwt.verify(token, secretKey)
-        if(typeof decodedUser === "object" && "username" in decodedUser!) return decodedUser.username
+        if(typeof decodedUser === "object" && "username" in decodedUser! && "id" in decodedUser!) return decodedUser as UserToken
         else return null
     } catch(err) {
         return null;
     }
-}
-
-export function createUser(user: string, pass: string): boolean {
-    if(users.some(({ username }) => username == user)) return false
-    else {
-        users.push({username: user, password: pass})
-        return true
-    }
-}
-
-export function validateCredentials(user:string, pass: string) {
-    return users.some(({username, password}) => username == user && password == pass)
 }
