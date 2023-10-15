@@ -59,6 +59,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 30rem;
+		max-width: 90vw;
 		border: 2px solid black;
 	}
 
