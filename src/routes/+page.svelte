@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-
+	import ErrorMsg from '../components/ErrorMsg.svelte';
 	export let data;
 	export let form;
 	let creating = false;
@@ -13,7 +13,7 @@
 <main>
 	<h2>Your Todos</h2>
 	{#if form?.error}
-		<p class="error">{form.error}</p>
+		<ErrorMsg error={form.error} />
 	{/if}
 
 	<form method="POST" action="?/create" use:enhance={() => {
@@ -75,10 +75,5 @@
 
 	li:nth-child(even) {
 		background-color: aliceblue;
-	}
-
-	.error {
-		font-size: 1rem;
-		color: red;
 	}
 </style>

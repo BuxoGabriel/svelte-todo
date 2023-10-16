@@ -1,6 +1,7 @@
 <script>
     export let form;
 	import { enhance } from "$app/forms";
+    import ErrorMsg from "../../components/ErrorMsg.svelte";
 </script>
 
 <h1>Login</h1>
@@ -28,5 +29,5 @@
 <p>Don't have an account? Register <a href="/register">here!</a></p>
 
 {#if form?.error}
-    <p style="color: red; font-size: 1rem;">{form.error}</p>
+    <ErrorMsg error={form.error} />
 {/if}
