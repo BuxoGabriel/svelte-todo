@@ -5,6 +5,18 @@
 	export let form;
 	let creating = false;
 	let deleting: number[] = [];
+
+	async function handleCheckBoxClicked(e: Event & { currentTarget: EventTarget & HTMLInputElement; }, todoId: number) {
+		const checked: boolean = e.currentTarget!.checked
+		const headers = new Headers()
+		headers.append('Content-Type', 'application/json')
+		await fetch("/todo", {
+			method: "PUT",
+			body: JSON.stringify({checked, todoId}),
+			headers: headers
+		})
+	}
+
 </script>
 
 <header>
@@ -38,7 +50,8 @@
 						deleting = deleting.filter(id => id !== todo.id)
 					}
 				}}>
-					<input type="checkbox" checked={todo.completed} name="completed" />
+					<input type="checkbox" checked={todo.completed} name="completed" 
+						on:change={(e) => handleCheckBoxClicked(e, todo.id)}/>
 					<input type="hidden" name="id" value={todo.id} />
 					<span>{index + 1}. {todo.text}</span>
 					<button style="background-color: #eeaaa0;" type="submit">X</button>
