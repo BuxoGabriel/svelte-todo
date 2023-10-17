@@ -1,7 +1,6 @@
-import type { RequestHandler } from './todo/$types';
 import todos from "$lib/database/todos"
 import { decodeJwt } from '$lib/auth';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail, redirect, type RequestHandler } from '@sveltejs/kit';
 
 export const PUT: RequestHandler = async ({ request, cookies }) => {
     // Get User

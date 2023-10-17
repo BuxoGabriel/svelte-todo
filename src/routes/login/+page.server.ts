@@ -5,7 +5,7 @@ import { fail, redirect } from '@sveltejs/kit'
 export const actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData()
-        const username = data.get('username')
+        let username = data.get('username')
         const password = data.get('password')
         // validate input
         if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
@@ -14,6 +14,7 @@ export const actions = {
                 error: 'invalid username or password'
             })
         }
+        username = username.toLowerCase()
         // check if user exists
         try {
             const user = await users.authenticateUser(username, password)

@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import ErrorMsg from '../lib/components/ErrorMsg.svelte';
+	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
+	import CreateList from '$lib/components/CreateList.svelte'
+
 	export let data;
 	export let form;
 	let creating = false;
 	let deleting: number[] = [];
+	let selectedList = data.todoList.id;
+	let showModal = false
+	$: if(selectedList == -1) showModal = true
 
 	async function handleCheckBoxClicked(
 		e: Event & { currentTarget: EventTarget & HTMLInputElement },
@@ -25,7 +30,12 @@
 	<h1 class="text-xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
 </header>
 <main class="flex flex-col items-center">
-	<h1 class="text-2xl">Your Todos</h1>
+	<select class="w-96 text-2xl" bind:value={selectedList}>
+		{#each data.userLists as list}
+			<option value={list.id}>{list.name}</option>
+		{/each}
+			<option value="-1">Create New List</option>
+	</select>
 	{#if form?.error}
 		<ErrorMsg error={form.error} />
 	{/if}
@@ -42,12 +52,13 @@
 			};
 		}}
 	>
+		<input type="hidden" name="list" bind:value={selectedList} />
 		<label for="text" class="sr-only">Add a todo:</label>
 		<input disabled={creating} placeholder="Add a todo" class="grow h-full px-2" id="text" name="text" type="text" required />
 		<button class="bg-slate-500 text-white px-2 rounded-sm h-full">Add</button>
 	</form>
 	<ul class="flex flex-col max-w-md w-full border-black border">
-		{#each data.todoList.filter((td) => !deleting.includes(td.id)) as todo, index (todo.id)}
+		{#each data.todoList.list.filter((td) => !deleting.includes(td.id)) as todo (todo.id)}
 			<li>
 				<form
 					class="flex"
@@ -78,6 +89,8 @@
 		{/each}
 	</ul>
 </main>
+
+<CreateList bind:showModal/>
 
 <style>
 	li:nth-child(even) {

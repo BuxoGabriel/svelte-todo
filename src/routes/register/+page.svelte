@@ -9,6 +9,7 @@
 	<form class="flex flex-col my-8 border" method="POST" use:enhance>
 		<label
 			>Username:
+			<!-- svelte-ignore a11y-autofocus -->
 			<input
 				id="username"
                 class="w-full"
