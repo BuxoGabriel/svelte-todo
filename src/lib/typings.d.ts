@@ -20,11 +20,15 @@ export interface ITodo {
     deleteTodo(user: number, todoid: number): Promise<Todo>
     getTodos(list: number, user: number): Promise<Todo[]>
     setTodoDone(user: number, todoid: number, completed: boolean): Promise<Todo>
-    getLists(user: number): Promise<List[]>
-    addList(user: number, name: string): Promise<List>
 }
 
 export interface IUser {
     authenticateUser(username: string, password: string): Promise<User>,
     createUser(username: string, password: string): Promise<User>,
+}
+
+export interface IList {
+    getLists(user: number): Promise<List[]>
+    addList(user: number, name: string): Promise<List>
+    deleteList(user: number, id: number): Promise<List>
 }

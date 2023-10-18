@@ -1,4 +1,3 @@
-import '$lib/dotenv-config'
 import type { IUser } from "$lib/typings";
 import postgresUsers from "./postgresUsers";
 

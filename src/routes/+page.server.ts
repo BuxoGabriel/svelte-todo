@@ -1,5 +1,6 @@
 import { decodeJwt } from '$lib/auth.js'
 import todos from '$lib/database/todos'
+import lists from '$lib/database/lists'
 import { error, fail, redirect } from '@sveltejs/kit'
 
 export async function load({ cookies }) {
@@ -12,7 +13,7 @@ export async function load({ cookies }) {
     // see if user has last looked at a list
     const { id, username } = userInfo
     const lastlist = cookies.get("lastList")
-    const userLists = await todos.getLists(id)
+    const userLists = await lists.getLists(id)
     let list = userLists[0].id;
     if(lastlist) {
         const lList = parseInt(lastlist)

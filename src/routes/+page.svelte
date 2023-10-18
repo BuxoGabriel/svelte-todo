@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
 	import CreateList from '$lib/components/CreateList.svelte'
+	import type { List } from '$lib/typings.js';
 
 	export let data;
 	export let form;
@@ -9,6 +10,7 @@
 	let deleting: number[] = [];
 	let selectedList = data.todoList.id;
 	let showModal = false
+	let lists = data.userLists
 	$: if(selectedList == -1) showModal = true
 
 	async function handleCheckBoxClicked(
@@ -24,6 +26,26 @@
 			headers: headers
 		});
 	}
+
+	async function createTodo(e: Event) {
+		e.preventDefault()
+		if(!e.target) return
+		const formData = new FormData(e.target as HTMLFormElement)
+		const name = formData.get("name")
+		if(!name) return
+		const headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		const res = await fetch('/list', {
+			method: "POST",
+			body: JSON.stringify({ name }),
+			headers
+		})
+		const newList: List = await res.json()
+		selectedList = newList.id
+		lists.push(newList)
+		lists = lists
+		showModal = false
+	}
 </script>
 
 <header>
@@ -31,7 +53,7 @@
 </header>
 <main class="flex flex-col items-center">
 	<select class="w-96 text-2xl" bind:value={selectedList}>
-		{#each data.userLists as list}
+		{#each lists as list}
 			<option value={list.id}>{list.name}</option>
 		{/each}
 			<option value="-1">Create New List</option>
@@ -90,7 +112,7 @@
 	</ul>
 </main>
 
-<CreateList bind:showModal/>
+<CreateList bind:showModal action={createTodo}/>
 
 <style>
 	li:nth-child(even) {
