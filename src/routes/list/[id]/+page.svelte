@@ -79,7 +79,7 @@
 					<label for={'checkbox' + todo.id} class="sr-only">Toggle todo completed</label>
 					<input
 						id={'checkbox' + todo.id}
-						class="w-10"
+						class="w-10 h-10"
 						type="checkbox"
 						checked={todo.completed}
 						name="completed"
