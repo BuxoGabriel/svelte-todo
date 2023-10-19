@@ -32,7 +32,7 @@
 	</button>
 </header>
 <main class="flex flex-col items-center pb-8">
-	<h1 class="text-2xl">{data.listName}</h1>
+	<h1 class="text-2xl capitalize">{data.listName}</h1>
 	{#if form?.error}
 		<ErrorMsg error={form.error} />
 	{/if}
