@@ -4,8 +4,10 @@
 
 	export let data: PageData;
 </script>
-
-<div class="w-full max-w-sm my-4 mx-auto">
+<header>
+	<h1 class="text-2xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
+</header>
+<main class="w-full max-w-sm pb-8 mx-auto">
 	<h1 class="text-center text-2xl">Your Todo Lists:</h1>
 	<form class="flex flex-col w-full py-2" method="POST" action="?/create" use:enhance>
 		<div class="flex flex-row my-4 h-12 items-center">
@@ -25,4 +27,4 @@
 			</li>
 		{/each}
 	</ul>
-</div>
+</main>

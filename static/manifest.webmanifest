@@ -1,0 +1,56 @@
+{
+    "short_name": "Todo",
+    "name": "Todo App",
+    "icons": [
+      {
+        "src": "/images/checklist.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "background_color": "#3367D6",
+    "display": "fullscreen",
+    "scope": "/",
+    "theme_color": "#3367D6",
+    "shortcuts": [
+      {
+        "name": "Todo Login",
+        "short_name": "Login",
+        "description": "Login to the todo app",
+        "url": "/login?source=pwa",
+        "icons": [{ "src": "/images/todo.jpg", "sizes": "400x400" }]
+      },
+      {
+        "name": "Your Lists",
+        "short_name": "Todos",
+        "description": "View your todo list",
+        "url": "/list?source=pwa",
+        "icons": [{ "src": "/images/checklist.png", "sizes": "512x512" }]
+      }
+    ],
+    "description": "An app for tracking your todo items",
+    "screenshots": [
+      {
+        "src": "/images/screenshot1.png",
+        "type": "image/png",
+        "sizes": "1024x576"
+      },
+      {
+        "src": "/images/screenshot2.png",
+        "type":"image/png",
+        "sizes": "1024x576"
+      },
+      {
+        "src": "/images/screenshot3.png",
+        "type":"image/png",
+        "sizes": "395x796"
+      },
+      {
+        "src": "/images/screenshot4.png",
+        "type":"image/png",
+        "sizes": "390x787"
+      }
+    ]
+  }

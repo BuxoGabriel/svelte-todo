@@ -6,8 +6,8 @@
 
 <div class="flex flex-col items-center justify-center my-6">
 	<h1 class="text-center text-4xl">Login</h1>
-	<form class="flex flex-col my-8 border rounded-md px-2 pt-2 pb-8 border-slate-400" method="POST" use:enhance>
-		<label
+	<form class="flex flex-col gap-4 my-8 border rounded-md px-2 pt-2 pb-8 border-slate-400" method="POST" use:enhance>
+		<label class="text-lg"
 			>Username:
 			<!-- svelte-ignore a11y-autofocus -->
 			<input
@@ -15,21 +15,19 @@
                 class="w-full"
 				type="username"
 				name="username"
-				placeholder="Enter your username"
 				value={form?.username ?? ''}
 				required
 				autofocus
 			/>
 		</label>
 
-		<label
+		<label class="text-lg"
 			>Password:
 			<input
 				id="password"
                 class="w-full"
 				type="password"
 				name="password"
-				placeholder="Enter your password"
 				required
 			/>
 		</label>

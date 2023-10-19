@@ -6,7 +6,7 @@ export async function load({ cookies }) {
     const user = getUserTokenFromCookie(cookies)
     if (!user) throw redirect(302, "/login")
     const userLists = lists.getLists(user.id)
-    return { lists: userLists };
+    return { lists: userLists, username: user.username };
 };
 
 export const actions = {

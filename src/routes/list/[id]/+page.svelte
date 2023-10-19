@@ -30,10 +30,9 @@
 	<button>
 		<a href="/list"><LeftArr size={50} /></a>
 	</button>
-	<h1 class="text-xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
 </header>
 <main class="flex flex-col items-center pb-8">
-	<h1>{data.listName}</h1>
+	<h1 class="text-2xl">{data.listName}</h1>
 	{#if form?.error}
 		<ErrorMsg error={form.error} />
 	{/if}

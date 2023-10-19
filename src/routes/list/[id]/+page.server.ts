@@ -1,5 +1,6 @@
 import { getUserTokenFromCookie } from '$lib/auth.js'
 import todos from '$lib/database/todos'
+import lists from '$lib/database/lists'
 import { error, fail, redirect } from '@sveltejs/kit'
 
 export async function load({ cookies, params }) {
@@ -13,8 +14,8 @@ export async function load({ cookies, params }) {
     if(isNaN(listId)) throw error(404, "Invalid List")
     const todoList = await todos.getTodos(listId, id) ?? []
 
-    // TODO
-    const listName = "Todo List"
+    const userLists = await lists.getLists(id)
+    const listName = userLists.find(list => list.id === listId)?.name
     return { username, todoList, listName }
 }
 
