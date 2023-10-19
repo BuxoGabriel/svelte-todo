@@ -6,7 +6,7 @@
 
 	export let data;
 	export let form;
-	let todos = data.todoList;
+	$: todos = data.todoList;
 	let creating = false;
 	let deleting: number[] = [];
 

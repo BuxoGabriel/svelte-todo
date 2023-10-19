@@ -25,7 +25,6 @@ async function createUser(username: string, password: string): Promise<User> {
         const hashPass = await hash(password, salt)
         const res = await pc.query('INSERT INTO "User"(username, password, salt) VALUES ($1, $2, $3) RETURNING *;', [username, hashPass, salt])
         const user = res.rows[0]
-        await pc.query('INSERT INTO "List"(user, name) VALUES ($1, $2);', [user.id, "Todo List"])
         if(!user) throw new Error("Could not create user")
         return user as User
     })
