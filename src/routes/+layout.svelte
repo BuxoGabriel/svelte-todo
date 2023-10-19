@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 </script>
-<div class="h-screen bg-slate-200">
+<div class="min-h-screen h-full w-full max-w-full bg-slate-200">
 	<nav class="h-20 p-2 bg-slate-800 flex flex-row align-center justify-between">
 		<div class="text-4xl px-2 text-gray-300">Todo App</div>
 		<form class="px-2" action="/logout" method="DELETE">
