@@ -2,28 +2,12 @@
 	import { enhance } from '$app/forms';
 	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
 	import LeftArr from '$lib/components/LeftArr.svelte';
-	import type { Todo } from '$lib/typings.js';
 	import TodoList from './TodoList.svelte';
 
 	export let data;
 	export let form;
 	$: todos = data.todoList;
 	let creating = false;
-
-	async function handleCheckboxClicked(e: Event, id: number) {
-		const target = e.target as HTMLInputElement;
-		if (target.type == 'checkbox') {
-			const headers = new Headers();
-			headers.append('Content-Type', 'application/json');
-			const response = await fetch('/list/api', {
-				method: 'PUT',
-				headers: headers,
-				body: JSON.stringify({ completed: target.checked, id })
-			});
-			const updatedTodo: Todo = await response.json()
-			todos = todos.map(todo => todo.id === updatedTodo.id? updatedTodo: todo)
-		}
-	}
 </script>
 
 <header>
