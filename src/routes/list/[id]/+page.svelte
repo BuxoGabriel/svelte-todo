@@ -3,6 +3,7 @@
 	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
 	import LeftArr from '$lib/components/LeftArr.svelte';
 	import type { Todo } from '$lib/typings.js';
+	import TodoList from './TodoList.svelte';
 
 	export let data;
 	export let form;
@@ -61,41 +62,5 @@
 		/>
 		<button class="bg-slate-500 text-white px-2 rounded-sm h-full">Add</button>
 	</form>
-	<ul class="flex flex-col max-w-md w-full border-black border">
-		{#each todos.filter((td) => !deleting.includes(td.id)) as todo (todo.id)}
-			<li>
-				<form
-					class="flex"
-					method="POST"
-					action="?/delete"
-					use:enhance={() => {
-						deleting = [...deleting, todo.id];
-						return async ({ update }) => {
-							await update();
-							deleting = deleting.filter((id) => id !== todo.id);
-						};
-					}}
-				>
-					<label for={'checkbox' + todo.id} class="sr-only">Toggle todo completed</label>
-					<input
-						id={'checkbox' + todo.id}
-						class="w-10 h-10"
-						type="checkbox"
-						checked={todo.completed}
-						name="completed"
-						on:click={(e) => handleCheckboxClicked(e, todo.id)}
-					/>
-					<input type="hidden" name="id" value={todo.id} />
-					<span class="grow px-2 capitalize">{todo.text}</span>
-					<button class="w-10 h-10" style="background-color: #eeaaa0;" type="submit">X</button>
-				</form>
-			</li>
-		{/each}
-	</ul>
+	<TodoList {todos} />
 </main>
-
-<style>
-	li:nth-child(even) {
-		background-color: aliceblue;
-	}
-</style>
