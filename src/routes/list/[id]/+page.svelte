@@ -9,7 +9,6 @@
 	export let form;
 	$: todos = data.todoList;
 	let creating = false;
-	let deleting: number[] = [];
 
 	async function handleCheckboxClicked(e: Event, id: number) {
 		const target = e.target as HTMLInputElement;
