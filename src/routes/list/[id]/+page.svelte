@@ -12,7 +12,7 @@
 
 <header>
 	<button>
-		<a href="/list"><LeftArr size={50} /></a>
+		<a href="/list"><LeftArr size={"50px"} /></a>
 	</button>
 </header>
 <main class="flex flex-col items-center pb-8">
