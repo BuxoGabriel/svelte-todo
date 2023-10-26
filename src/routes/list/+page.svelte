@@ -19,7 +19,7 @@
 	<ul>
 		{#each data.lists as list}
 			<li class="flex flex-row border-b border-black pt-4">
-				<a href="/list/{list.id}" class="text-lg grow capitalize">{list.name}</a>
+				<a data-sveltekit-preload-data="viewport" href="/list/{list.id}" class="text-lg grow capitalize">{list.name}</a>
 				<form method="POST" action="?/delete">
 					<input type="hidden" name="id" value={list.id} />
 					<button type="submit" class="w-10 h-10" style="background-color: #eeaaa0;">x</button>
