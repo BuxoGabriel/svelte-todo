@@ -18,7 +18,7 @@ sw.addEventListener("install", e => {
     e.waitUntil(
         (async () => {
             const cache = await caches.open(CACHE)
-            cache.addAll(ASSETS)
+            await cache.addAll(ASSETS)
         })()
     )
 })
@@ -29,7 +29,7 @@ sw.addEventListener("activate", e => {
             const names = await caches.keys()
             await Promise.all(
                 names.map(name => {
-                    if (name !== CACHE) return caches.delete(name)
+                    if(name !== CACHE) return caches.delete(name)
                 })
             )
             await clients.claim()
