@@ -9,7 +9,7 @@
       }
     ],
     "id": "/?source=pwa",
-    "start_url": "/?source=pwa",
+    "start_url": "/list?source=pwa",
     "background_color": "#3367D6",
     "display": "fullscreen",
     "scope": "/",
