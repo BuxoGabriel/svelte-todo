@@ -2,6 +2,7 @@ export type Todo = {
     id: number,
     text: string,
     completed: boolean
+    list: number
 }
 
 export type User = {
@@ -12,7 +13,6 @@ export type User = {
 export type List = {
     id: number,
     name: string,
-    user: number
 }
 
 export interface ITodo {
