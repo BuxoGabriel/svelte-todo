@@ -6,11 +6,12 @@
 	export let data;
 	let listName: string = $localLists.find(list => list.id == data.listId)!.name
 	let newTodoName: string = ""
+	$:todos = $localTodos.filter(todo => todo.list == data.listId)
 </script>
 
 <header>
 	<button>
-		<a href="/list"><LeftArr size={"50px"} /></a>
+		<a href="/local"><LeftArr size={"50px"} /></a>
 	</button>
 </header>
 <main class="flex flex-col items-center pb-8">
@@ -30,5 +31,5 @@
 		/>
 		<button class="bg-slate-500 text-white px-2 rounded-sm h-full">Add</button>
 	</form>
-	<TodoList todos={$localTodos.filter(todo => todo.list == data.listId)}/>
+	<TodoList {todos}/>
 </main>

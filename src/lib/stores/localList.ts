@@ -88,7 +88,7 @@ export const localTodos = {
         todosStore.update(todos => {
             const updatedTodos = todos.filter(todo => todo.id !== todoId)
             setLocalTodos(updatedTodos)
-            return todos
+            return updatedTodos
         })
     },
     setTodoDone: (todoId: number, completed: boolean) => {
