@@ -8,8 +8,8 @@
         "sizes": "512x512"
       }
     ],
-    "id": "/?source=pwa",
-    "start_url": "/list?source=pwa",
+    "id": "/local",
+    "start_url": "/local",
     "background_color": "#3367D6",
     "display": "fullscreen",
     "scope": "/",
@@ -28,6 +28,12 @@
         "description": "View your todo list",
         "url": "/list?source=pwa",
         "icons": [{ "src": "/images/checklist.png", "sizes": "512x512" }]
+      },
+      {
+        "name": "Offline",
+        "description": "Use todo app offline",
+        "url": "/local?source=pwa",
+        "icons": [{ "src": "/images/todo.jpg", "sizes": "400x400" }]
       }
     ],
     "description": "An app for tracking your todo items",
