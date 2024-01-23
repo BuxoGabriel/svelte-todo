@@ -1,6 +1,7 @@
 import users from '$lib/database/users'
 import { createJwt } from '$lib/auth.js'
 import { fail, redirect } from '@sveltejs/kit'
+import { USER_COOKIE_DURATION } from '$env/static/private'
 
 export const actions = {
     default: async ({ request, cookies }) => {
@@ -20,8 +21,8 @@ export const actions = {
             const user = await users.createUser(username, password)
             // set cookie
             const token = createJwt({ id: user.id, username: user.username })
-            cookies.set('userToken', token)
-
+            // cookies persist for 50 days
+            cookies.set('userToken', token, { maxAge: 60 * 60 * 24 * parseInt(USER_COOKIE_DURATION)})
         } catch (error) {
             return fail(422, {
                 username,
