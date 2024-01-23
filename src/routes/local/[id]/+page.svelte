@@ -18,7 +18,9 @@
 	<h1 class="text-2xl capitalize">{listName}</h1>
 
 	<form class="w-full max-w-md h-10 flex items-center my-4" on:submit|preventDefault={e => {
+		if(!newTodoName.trim()) return
 		localTodos.addTodo(newTodoName, data.listId)
+		newTodoName = ""
 	}}>
 		<label for="text" class="sr-only">Add a todo:</label>
 		<input

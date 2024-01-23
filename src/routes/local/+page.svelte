@@ -6,7 +6,11 @@
 </script>
 <main class="w-full max-w-sm pb-8 mx-auto">
 	<h1 class="text-center text-2xl">Your Todo Lists:</h1>
-	<form class="flex flex-col w-full py-2" on:submit|preventDefault={(e) => {localLists.addList(newListName)}}>
+	<form class="flex flex-col w-full py-2" on:submit|preventDefault={(e) => {
+		if(!newListName.trim()) return
+		localLists.addList(newListName)
+		newListName = ""
+	}}>
 		<div class="flex flex-row my-4 h-12 items-center">
 			<label for="name" class="px-2 text-2xl">List Name:</label>
 			<input class="grow bg-white border border-black h-full px-2" id="name" name="name" type="text" bind:value={newListName}/>

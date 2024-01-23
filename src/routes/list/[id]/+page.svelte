@@ -8,6 +8,7 @@
 	export let form;
 	$: todos = data.todoList;
 	let creating = false;
+	let newTodoText: string = ""
 </script>
 
 <header>
@@ -27,6 +28,7 @@
 		action="?/create"
 		use:enhance={() => {
 			creating = true;
+			newTodoText = ""
 			return async ({ update }) => {
 				await update();
 				creating = false;
@@ -41,6 +43,7 @@
 			id="text"
 			name="text"
 			type="text"
+			bind:value={newTodoText}
 			required
 		/>
 		<button class="bg-slate-500 text-white px-2 rounded-sm h-full">Add</button>
