@@ -33,7 +33,7 @@
 		</label>
 		<button class="border border-black" type="submit">Register</button>
 	</form>
-	<p>Already have an account? Login <a data-sveltekit-preload-data class="text-blue-800" href="/login">here!</a></p>
+	<p>Already have an account? Login <a data-sveltekit-preload-data class="text-blue-500" href="/login">here!</a></p>
 
 	{#if form?.error}
 		<ErrorMsg error={form.error} />

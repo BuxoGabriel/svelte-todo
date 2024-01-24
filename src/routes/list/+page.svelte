@@ -7,6 +7,7 @@
 	let newListName: string = ""
 	$loggedIn = true
 </script>
+
 <header>
 	<h1 class="text-2xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
 </header>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let form;
 	import { enhance } from '$app/forms';
 	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
@@ -36,7 +36,7 @@
 		</label>
 		<button class="border border-black" type="submit">Login</button>
 	</form>
-	<p>Don't have an account? Register <a class="text-blue-800" data-sveltekit-preload-data href="/register">here!</a></p>
+	<p>Don't have an account? Register <a class="text-blue-500" data-sveltekit-preload-data href="/register">here!</a></p>
 
 	{#if form?.error}
 		<ErrorMsg error={form.error} />

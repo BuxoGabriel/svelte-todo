@@ -30,6 +30,6 @@ export const actions = {
             })
         }
         // redirect to app
-        throw redirect(303, "/")
+        throw redirect(303, "/list")
     }
 }
