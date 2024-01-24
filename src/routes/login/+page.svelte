@@ -2,6 +2,9 @@
 	export let form;
 	import { enhance } from '$app/forms';
 	import ErrorMsg from '$lib/components/ErrorMsg.svelte';
+	import { loggedIn } from "$lib/stores/login";
+
+	$loggedIn = false
 </script>
 
 <div class="flex flex-col items-center justify-center my-6">

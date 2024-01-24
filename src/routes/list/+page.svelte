@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
+	import { loggedIn } from '$lib/stores/login';
 
 	export let data: PageData;
 	let newListName: string = ""
+	$loggedIn = true
 </script>
 <header>
 	<h1 class="text-2xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
