@@ -24,6 +24,7 @@ export const actions = {
             // cookies persist for 50 days
             cookies.set('userToken', token, { maxAge: 60 * 60 * 24 * parseInt(USER_COOKIE_DURATION)})
         } catch(error) {
+            if((error as Error).message.includes("getaddrinfo")) throw Error("database is not available")
             return fail(422, {
                 username,
                 error: (error as Error).message
