@@ -6,7 +6,7 @@
 
 <div class="flex flex-col items-center justify-center my-6">
 	<h1 class="text-center text-4xl">Register</h1>
-	<form class="flex flex-col gap-4 my-8 border rounded-md px-2 pt-2 pb-8 border-slate-400" method="POST" use:enhance>
+	<form class="flex flex-col gap-4 my-8 px-2 pt-2 pb-8 border-slate-400" method="POST" use:enhance>
 		<label class="text-lg"
 			>Username:
 			<!-- svelte-ignore a11y-autofocus -->

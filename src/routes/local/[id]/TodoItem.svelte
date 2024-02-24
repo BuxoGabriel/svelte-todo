@@ -24,7 +24,7 @@
 	}
 </script>
 
-<form class="flex items-center" on:submit|preventDefault>
+<form class="flex items-center h-10" on:submit|preventDefault>
 	<label for={'checkbox' + todo.id} class="sr-only">Toggle todo completed</label>
 	<input
 		id={'checkbox' + todo.id}
@@ -34,7 +34,7 @@
 		name="completed"
 		on:click={(e) => handleCheckboxClicked(e, todo.id)}
 	/>
-	<span class:line-through={completed} class="grow px-2 capitalize decoration-black/80">{todo.text}</span>
+	<span class:line-through={completed} class="flex-1 px-2 capitalize decoration-black/80">{todo.text}</span>
 	<button class="w-10 h-10" style="background-color: #eeaaa0;" on:click={() => {
 		localTodos.deleteTodo(todo.id)
 	}}>X</button>
