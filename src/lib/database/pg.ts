@@ -17,6 +17,20 @@ export async function useClient<T>(fn: (c:pg.PoolClient) => Promise<T>): Promise
     return res
 }
 
+export async function makeQuery<T>(query: string, args: (string | number | boolean)[]): Promise<T[]> {
+    return useClient(async (c) => {
+        const res = await c.query(query, args)
+        return res.rows as T[]
+    })
+}
+
+export async function makeOneRowQuery<T>(query: string, args: (string | number | boolean)[]): Promise<T> {
+    return useClient(async (c) => {
+        const res = await c.query(query, args)
+        return res.rows[0] as T
+    })
+}
+
 process.on('SIGINT', closePool)
 process.on('exit', closePool)
 

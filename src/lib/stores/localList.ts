@@ -43,16 +43,14 @@ const todosStore = writable<Todo[]>(getLocalTodos())
 export const localLists = {
     subscribe: listStore.subscribe,
     addList: (listName: string) => {
+        let id = 0
         listStore.update(lists => {
-            let id = 0
-            lists.forEach(list => {
-                if (list.id > id) id = list.id
-            })
-            id++
+            id = lists.reduce((acc, l) => Math.max(acc, l.id), 0) + 1
             const updatedLists: List[] = [...lists, { name: listName, id }]
             setLocalLists(updatedLists)
             return updatedLists
         })
+        return id
     },
     deleteList: (listId: number) => {
         // delete list from localstorage
@@ -73,16 +71,17 @@ export const localLists = {
 export const localTodos = {
     subscribe: todosStore.subscribe,
     addTodo: (text: string, list: number) => {
+        localTodos.addRawTodo(text, list, false)
+    },
+    addRawTodo: (text: string, list: number, completed: boolean) => {
+        let id = 0
         todosStore.update(todos => {
-            let id = 0
-            todos.forEach(todo => {
-                if (todo.id > id) id = todo.id
-            })
-            id++
-            const updatedTodos: Todo[] = [...todos, { id, text, completed: false, list }]
+            id = todos.reduce((acc, td) => Math.max(acc, td.id), 0) + 1
+            const updatedTodos: Todo[] = [...todos, { id, text, completed, list }]
             setLocalTodos(updatedTodos)
             return updatedTodos
         })
+        return id
     },
     deleteTodo: (todoId: number) => {
         todosStore.update(todos => {

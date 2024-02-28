@@ -18,6 +18,7 @@ export type List = {
 export interface ITodo {
     addTodo(user: number, todo: string, list: number): Promise<Todo>,
     deleteTodo(user: number, todoid: number): Promise<Todo>
+    getAllTodos(user: number): Promise<Todo[]>
     getTodos(list: number, user: number): Promise<Todo[]>
     setTodoDone(user: number, todoid: number, completed: boolean): Promise<Todo>
 }

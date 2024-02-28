@@ -25,7 +25,7 @@
 		timeout = setTimeout(async () => {
 			const headers = new Headers();
 			headers.append('Content-Type', 'application/json');
-			const response = await fetch('/list/api', {
+			const response = await fetch('/api/list', {
 				method: 'PUT',
 				headers: headers,
 				body: JSON.stringify({ completed: target.checked, id })

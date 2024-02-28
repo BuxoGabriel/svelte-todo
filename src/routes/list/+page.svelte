@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
 	import { loggedIn } from '$lib/stores/login';
+	import ExportToOfflineButton from '$lib/components/ExportToOfflineButton.svelte';
 
 	export let data: PageData;
 	let newListName: string = ""
@@ -9,7 +10,10 @@
 </script>
 
 <header>
-	<h1 class="text-2xl md:text-2xl capitalize p-4">Hello {data.username}</h1>
+	<div class="flex flex-row w-full">
+		<h1 class="text-2xl md:text-2xl capitalize p-4 grow">Hello {data.username}</h1>
+		<ExportToOfflineButton lists={data.lists}/>
+	</div>
 </header>
 <main class="w-full max-w-sm pb-8 mx-auto">
 	<h1 class="text-center text-2xl">Your Todo Lists:</h1>
