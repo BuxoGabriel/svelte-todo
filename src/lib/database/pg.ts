@@ -1,7 +1,7 @@
-import '$lib/dotenv-config'
+import { DATABASE_URL } from '$env/static/private'
 import pg from 'pg'
 
-const connectionString = process.env.DATABASE_URL
+const connectionString = DATABASE_URL
 console.log(connectionString)
 
 const pool = new pg.Pool({

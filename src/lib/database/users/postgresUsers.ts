@@ -1,4 +1,3 @@
-import '$lib/dotenv-config'
 import type { IUser, User } from "$lib/typings";
 import { genSalt, hash } from "bcrypt";
 import { makeOneRowQuery } from "../pg";

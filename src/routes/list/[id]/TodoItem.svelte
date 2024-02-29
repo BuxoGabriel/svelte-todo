@@ -53,7 +53,7 @@
 	<label for={'checkbox' + todo.id} class="sr-only">Toggle todo completed</label>
 	<input
 		id={'checkbox' + todo.id}
-		class="w-10 h-10"
+		class="w-10 h-10 cursor-pointer"
 		type="checkbox"
 		bind:checked={completed}
 		name="completed"

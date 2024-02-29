@@ -1,4 +1,3 @@
-import '$lib/dotenv-config'
 import type { Todo, ITodo} from "$lib/typings";
 import { makeOneRowQuery, makeQuery } from "../pg";
 

@@ -1,4 +1,3 @@
-import '$lib/dotenv-config'
 import { useClient } from "$lib/database/pg"
 import type { IList, List } from "$lib/typings"
 

@@ -1,8 +1,8 @@
+import  { JWT_SECRET } from "$env/static/private"
 import type { Cookies } from '@sveltejs/kit'
-import './dotenv-config'
 import { randomBytes } from "crypto"
 import jwt from "jsonwebtoken"
-const secretKey = process.env.JWT_SECRET ?? randomBytes(32).toString("hex")
+const secretKey = JWT_SECRET ?? randomBytes(32).toString("hex")
 
 export type UserToken = {
     id: number,
