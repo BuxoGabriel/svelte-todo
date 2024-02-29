@@ -70,6 +70,7 @@ export const localLists = {
 
 export const localTodos = {
     subscribe: todosStore.subscribe,
+    set: todosStore.set,
     addTodo: (text: string, list: number) => {
         localTodos.addRawTodo(text, list, false)
     },

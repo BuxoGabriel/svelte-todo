@@ -9,14 +9,27 @@
     async function handleClick() {
         if(loading || complete) return
         loading = true
+        // get todos from db
         let todos: Todo[] = await fetch("/api/todos").then(res => res.json())
+        // load todos into a list keyed Map for more efficiency in algorithm
         let todoMap = seperateTodosByList(todos)
+        // add todos from db to each list
         for(let list of lists) {
-            if($localLists.some(l => l.name == list.name)) continue; //TODO deal with merges on existing lists
-            let remapedId = localLists.addList(list.name)
-            let listTodos = todoMap.get(list.id) || []
-            for(let todo of listTodos) {
-                localTodos.addRawTodo(todo.text, remapedId, todo.completed)
+            let listTodos = todoMap.get(list.id)
+            // If there are no todos in this list then there is no work to do
+            if(!listTodos) continue
+            let localList = $localLists.find(l => l.name == list.name)
+            // If there is a matching list offline then replace overlapping todos and add missing ones
+            if(localList) {
+                for(let todo of listTodos) {
+                    $localTodos = $localTodos.filter(td => !(td.text == todo.text && td.list == localList!.id))
+                    localTodos.addRawTodo(todo.text, localList.id, todo.completed)
+                }
+            } else { // If this is an online only list create a new list and add all items that belong to it to offline
+                let remapedId = localLists.addList(list.name)
+                for(let todo of listTodos) {
+                    localTodos.addRawTodo(todo.text, remapedId, todo.completed)
+                }
             }
         }
         loading = false
